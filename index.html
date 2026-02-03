@@ -814,7 +814,7 @@ body {
 
 /* Menu hamburger (caché sur desktop) */
 .mobile-menu-btn {
-    display: none;
+    display: none !important; /* ← Ajout du !important */
     position: fixed;
     top: 15px;
     right: 15px;
@@ -4934,6 +4934,7 @@ function updateMainColor(color) {
 </div>
 </body>
 </html>
+
 
 
 
