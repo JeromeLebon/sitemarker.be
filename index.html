@@ -814,15 +814,15 @@ body {
 
 /* Menu hamburger (caché sur desktop) */
 .mobile-menu-btn {
-    display: none;
+    display: none !important; /* ← !important dès le début */
     position: fixed;
     top: 15px;
     right: 15px;
     width: 44px;
     height: 44px;
-    background: var(--primary-yellow);
+    background: var(--primary-yellow) !important;
     border-radius: 8px;
-    z-index: 10001; /* ← AU-DESSUS DE LA PUB */
+    z-index: 10001;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -4934,6 +4934,7 @@ function updateMainColor(color) {
 </div>
 </body>
 </html>
+
 
 
 
