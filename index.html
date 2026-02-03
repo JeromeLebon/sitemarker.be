@@ -857,11 +857,11 @@ body {
     position: fixed;
     top: 0;
     right: -100%;
-	bottom: 70px !important; }
+	bottom: 70px !important; 
     width: 280px;
-    height: 100vh;
+    height: calc(100% - 50px); /* 60px = hauteur de #bottom-ad-bar */
     background: white;
-    z-index: 2999;
+    z-index: 10000;
     box-shadow: -4px 0 20px rgba(0,0,0,0.2);
     transition: right 0.3s ease;
     overflow-y: auto;
@@ -904,11 +904,15 @@ body {
 }
 
 .mobile-menu-section button {
-    width: 100%;
-    margin-bottom: 8px;
-    justify-content: flex-start;
-    gap: 12px;
-    height: 44px !important;
+width: 100%; 
+display: flex; 
+align-items: center; 
+justify-content: center;
+gap: 8px;
+height: 44px !important;
+}
+.mobile-menu-section button + button {
+    margin-top: 10px;
 }
 
 /* ====== MEDIA QUERY MOBILE ====== */
@@ -4220,14 +4224,43 @@ function setupMapEvents() {
     });
 
     // 4. LOGIQUE MESURE (Click-to-Click)
-    map.on('click', e => {
-        if (activeMode !== 'measure') return;
+ map.on('click', (e) => {
 
-        // On récupère la couleur une seule fois ici
+    // 1️⃣ — Pose d’icône mobile
+    if (selectedIconKey) {
+        const all = {...SVG_LIBRARY, ...CUSTOM_ICONS};
+        const svgContent = all[selectedIconKey];
+        if (!svgContent) return;
+
+        const icon = L.divIcon({
+            html: `<div class="rotation-wrapper" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; transition: transform 0.1s;">
+                    ${svgContent}
+                   </div>`,
+            iconSize: [40, 40],
+            iconAnchor: [20, 20],
+            className: 'custom-div-icon'
+        });
+
+        const m = L.marker(e.latlng, {icon, draggable: true}).addTo(map);
+        m.options.rotationAngle = 0;
+
+        setupRotationEvents(m);
+
+        markers.push(m);
+        saveState();
+        showToast("📍 Icône placée");
+
+        selectedIconKey = null;
+        return; // IMPORTANT : on arrête ici
+    }
+
+    // 2️⃣ — Mode mesure
+    if (activeMode === 'measure') {
+
         const chosenColor = document.getElementById('colorPicker').value;
 
         if (!isDrawing) {
-            // PREMIER CLIC
+            // Premier clic
             isDrawing = true;
             measureLine = L.polyline([e.latlng, e.latlng], { 
                 color: chosenColor, 
@@ -4244,8 +4277,9 @@ function setupMapEvents() {
                 }),
                 interactive: false
             }).addTo(map);
+
         } else {
-            // DEUXIÈME CLIC
+            // Deuxième clic
             const points = measureLine.getLatLngs();
             const dist = points[0].distanceTo(e.latlng);
             const labelText = dist > 1000 ? (dist/1000).toFixed(2) + ' km' : dist.toFixed(1) + ' m';
@@ -4258,14 +4292,13 @@ function setupMapEvents() {
                 })
             }).addTo(map);
 
-            // Suppression individuelle au clic sur le badge
             const currentLine = measureLine;
             finalMarker.on('click', (ev) => {
                 L.DomEvent.stopPropagation(ev);
                 map.removeLayer(finalMarker);
                 map.removeLayer(currentLine);
-                if(typeof markers !== 'undefined') markers = markers.filter(m => m !== finalMarker);
-                if(typeof brushLines !== 'undefined') brushLines = brushLines.filter(l => l !== currentLine);
+                markers = markers.filter(m => m !== finalMarker);
+                brushLines = brushLines.filter(l => l !== currentLine);
             });
 
             brushLines.push(measureLine);
@@ -4277,7 +4310,12 @@ function setupMapEvents() {
             saveState();
             showToast(`✅ Distance: ${labelText}`);
         }
-    });
+
+        return; // IMPORTANT
+    }
+
+});
+
 
     // 5. MOUSE MOVE (Suivi visuel)
     map.on('mousemove', e => {
@@ -4998,7 +5036,6 @@ function closeAd() {
 </div>
 </body>
 </html>
-
 
 
 
