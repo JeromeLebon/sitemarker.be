@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
 <style>
     /* =========================================
    1. RESET & LAYOUT GLOBAL
@@ -788,6 +789,98 @@ input[type="color"] {
 body {
     padding-bottom: 110px; 
 }
+
+/* ========== RESPONSIVE MOBILE ========== */
+@media (max-width: 768px) {
+    /* Barre d'outils icons plus petite */
+    #iconToolbar {
+        height: 60px;
+        gap: 8px;
+        padding: 5px;
+    }
+    
+    .icon-item {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    /* Boutons de contrôle empilés */
+    #controls {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+        max-height: none;
+    }
+    
+    #controls button {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    /* Barre de recherche */
+    #searchBar {
+        flex-direction: column;
+        padding: 8px;
+    }
+    
+    #searchBar input {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    #searchBar button {
+        width: 100%;
+    }
+    
+    /* Panneau historique plus grand */
+    #historyPanel {
+        width: 90%;
+        max-width: none;
+        bottom: 60px; /* Au-dessus de la pub */
+    }
+    
+    #historyPanel.collapsed {
+        transform: translateX(calc(100% - 45px));
+    }
+    
+    /* Toast plus visible */
+    #modeIndicator {
+        font-size: 14px;
+        padding: 12px 20px;
+        max-width: 90%;
+    }
+    
+    /* Galerie d'icônes scrollable au doigt */
+    #iconToolbar {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Augmente la zone de touch des petits boutons */
+    .btn-go, .btn-del {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 8px;
+    }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 480px) {
+    #controls {
+        font-size: 12px;
+    }
+    
+    #controls button {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .icon-item {
+        width: 30px !important;
+        height: 30px !important;
+    }
+}
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1023162974911190"
@@ -795,6 +888,43 @@ body {
      
 </head>
 <body>
+	<button id="menuToggle" onclick="toggleMenu()" style="
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1001;
+    background: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
+    display: none;
+">☰</button>
+
+<style>
+@media (max-width: 768px) {
+    #menuToggle {
+        display: block !important;
+    }
+    
+    #controls {
+        position: fixed;
+        left: -100%;
+        transition: left 0.3s;
+    }
+    
+    #controls.open {
+        left: 0;
+    }
+}
+</style>
+
+<script>
+function toggleMenu() {
+    document.getElementById('controls').classList.toggle('open');
+}
+</script>
+	
 <div id="eraserCursor" class="eraser-visual-cursor"></div>
 
 <div id="topbar">
@@ -863,7 +993,7 @@ body {
 </div>
 
 <div class="toolbar-divider"></div>
-
+<button id="btnPlaceIcon" onclick="toggleIconPlacement()">📍 Place Icon</button>
     <button id="btnBrush" onclick="toggleBrush()" title="Freehand Drawing">
         <i class="fa-solid fa-paintbrush"></i>
         <span>Brush</span>
@@ -3577,6 +3707,185 @@ function renderToolbar() {
     // Icônes personnalisées
     Object.keys(CUSTOM_ICONS).forEach(key => addIconToBar(key, CUSTOM_ICONS[key], true));
 }
+
+let iconPlacementMode = null;
+
+function toggleIconPlacement() {
+    if (iconPlacementMode) {
+        iconPlacementMode = null;
+        document.getElementById('btnPlaceIcon').classList.remove('active');
+        showToast("❌ Icon placement cancelled");
+        return;
+    }
+    
+    // Affiche une sélection d'icônes
+    const all = {...SVG_LIBRARY, ...CUSTOM_ICONS};
+    const keys = Object.keys(all);
+    
+    if (keys.length === 0) {
+        showToast("❌ No icons available");
+        return;
+    }
+    
+    // Crée un sélecteur tactile
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.8); z-index: 10000;
+        display: flex; flex-direction: column; padding: 20px;
+    `;
+    
+    modal.innerHTML = `
+        <h3 style="color: white; margin: 0 0 15px;">Choose an icon:</h3>
+        <div id="iconSelector" style="
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px; 
+            overflow-y: auto;
+            flex: 1;
+        "></div>
+        <button onclick="this.parentElement.remove()" style="
+            margin-top: 15px; 
+            padding: 12px; 
+            background: #f44336; 
+            color: white; 
+            border: none; 
+            border-radius: 5px;
+            font-size: 16px;
+        ">Cancel</button>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    const selector = modal.querySelector('#iconSelector');
+    keys.forEach(key => {
+        const div = document.createElement('div');
+        div.style.cssText = `
+            background: white; 
+            padding: 10px; 
+            border-radius: 8px; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+        div.innerHTML = all[key];
+        
+        div.onclick = () => {
+            document.body.removeChild(modal);
+            iconPlacementMode = key;
+            document.getElementById('btnPlaceIcon').classList.add('active');
+            showToast("📍 Tap on map to place icon");
+            
+            // Au prochain clic sur la carte
+            map.once('click', e => {
+                placeIconAt(e.latlng, key);
+                iconPlacementMode = null;
+                document.getElementById('btnPlaceIcon').classList.remove('active');
+            });
+        };
+        
+        selector.appendChild(div);
+    });
+}
+function setupRotationEvents(m) {
+    const el = m.getElement();
+    if (!el) return;
+
+    m.on('mouseover', () => { 
+        map.scrollWheelZoom.disable(); 
+        el.style.outline = "1px dashed #3498db"; 
+    });
+
+    m.on('mouseout', () => { 
+        map.scrollWheelZoom.enable(); 
+        el.style.outline = "none"; 
+    });
+
+    m.on('remove', () => {
+        map.scrollWheelZoom.enable();
+    });
+
+    // WHEEL pour desktop
+    el.addEventListener('wheel', (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const direction = ev.deltaY > 0 ? 15 : -15;
+        m.options.rotationAngle = (m.options.rotationAngle || 0) + direction;
+        
+        const wrapper = el.querySelector('.rotation-wrapper');
+        if (wrapper) wrapper.style.transform = `rotate(${m.options.rotationAngle}deg)`;
+    }, { passive: false });
+
+    // TOUCH pour mobile : Long press + swipe
+    let touchStartY = 0;
+    let isLongPress = false;
+    let longPressTimer;
+    
+    el.addEventListener('touchstart', (ev) => {
+        touchStartY = ev.touches[0].clientY;
+        
+        // Long press de 500ms pour activer la rotation
+        longPressTimer = setTimeout(() => {
+            isLongPress = true;
+            el.style.outline = "2px solid #2196F3";
+            showToast("🔄 Swipe up/down to rotate");
+        }, 500);
+    });
+    
+    el.addEventListener('touchmove', (ev) => {
+        if (isLongPress) {
+            ev.preventDefault();
+            const deltaY = touchStartY - ev.touches[0].clientY;
+            m.options.rotationAngle = (m.options.rotationAngle || 0) + (deltaY * 0.5);
+            
+            const wrapper = el.querySelector('.rotation-wrapper');
+            if (wrapper) wrapper.style.transform = `rotate(${m.options.rotationAngle}deg)`;
+            
+            touchStartY = ev.touches[0].clientY;
+        }
+    }, { passive: false });
+    
+    el.addEventListener('touchend', () => {
+        clearTimeout(longPressTimer);
+        isLongPress = false;
+        el.style.outline = "none";
+    });
+
+    m.on('drag', () => {
+        const wrapper = el.querySelector('.rotation-wrapper');
+        if (wrapper) wrapper.style.transform = `rotate(${m.options.rotationAngle}deg)`;
+    });
+}
+function placeIconAt(latlng, iconKey) {
+    const all = {...SVG_LIBRARY, ...CUSTOM_ICONS};
+    const svgContent = all[iconKey];
+    
+    const icon = L.divIcon({
+        html: `<div class="rotation-wrapper" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                ${svgContent}
+               </div>`,
+        iconSize: [40, 40], 
+        iconAnchor: [20, 20], 
+        className: 'custom-div-icon' 
+    });
+
+    const m = L.marker(latlng, {icon, draggable: true}).addTo(map);
+    m.options.rotationAngle = 0;
+    setupRotationEvents(m);
+    
+    m.on('dblclick', (ev) => { 
+        L.DomEvent.stopPropagation(ev);
+        map.removeLayer(m); 
+        markers = markers.filter(item => item !== m);
+        map.scrollWheelZoom.enable();
+    });
+    
+    markers.push(m);
+    saveState();
+    showToast("✅ Icon placed");
+}
+	
 function addIconToBar(key, svg, isDeletable) {
     const bar = document.getElementById('iconToolbar');
     const div = document.createElement('div');
@@ -4593,6 +4902,7 @@ function closeAd() {
 </div>
 </body>
 </html>
+
 
 
 
