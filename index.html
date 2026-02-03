@@ -814,7 +814,7 @@ body {
 
 /* Menu hamburger (caché sur desktop) */
 .mobile-menu-btn {
-    display: none !important; /* ← Ajout du !important */
+    display: none;
     position: fixed;
     top: 15px;
     right: 15px;
@@ -822,7 +822,7 @@ body {
     height: 44px;
     background: var(--primary-yellow);
     border-radius: 8px;
-    z-index: 3000;
+    z-index: 10001; /* ← AU-DESSUS DE LA PUB */
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -859,7 +859,7 @@ body {
     width: 280px;
     height: 100vh;
     background: white;
-    z-index: 2999;
+    z-index: 10000; /* ← AU MÊME NIVEAU QUE LA PUB */
     box-shadow: -4px 0 20px rgba(0,0,0,0.2);
     transition: right 0.3s ease;
     overflow-y: auto;
@@ -4934,6 +4934,7 @@ function updateMainColor(color) {
 </div>
 </body>
 </html>
+
 
 
 
