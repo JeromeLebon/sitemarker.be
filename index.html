@@ -850,22 +850,23 @@ body {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Panneau mobile (caché par défaut) */
+/* Panneau mobile (caché sur desktop via position hors éFcran) */
 .mobile-menu-panel {
-    display: block; /* On le laisse en block */
+    display: none; /* Caché sur desktop pour ne pas gêner */
     position: fixed;
     top: 0;
-    right: -100%; /* Mais on le cache à droite de l'écran */
+    right: -100%; /* Hors écran à droite */
     width: 280px;
     height: 100vh;
     background: white;
     z-index: 10000;
-    transition: right 0.3s ease; /* L'animation se fera sur le 'right' */
+    box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+    transition: right 0.3s ease; /* Animation fluide */
     overflow-y: auto;
 }
 
 .mobile-menu-panel.open {
-    right: 0;
+    right: 0; /* Glisse vers la gauche */
 }
 
 .mobile-menu-section {
@@ -4933,6 +4934,7 @@ function updateMainColor(color) {
 </div>
 </body>
 </html>
+
 
 
 
