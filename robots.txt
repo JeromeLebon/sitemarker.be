@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://sitemarker.be/sitemap.xml
