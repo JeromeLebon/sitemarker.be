@@ -857,6 +857,7 @@ body {
     position: fixed;
     top: 0;
     right: -100%;
+	bottom: 70px !important; }
     width: 280px;
     height: 100vh;
     background: white;
@@ -3963,10 +3964,19 @@ function addIconToBars(key, svg, isDeletable) {
         return div;
     };
 
-    // On ajoute une copie dans chaque barre
+    // Desktop : drag & drop
     desktopBar.appendChild(createIcon());
-    mobileBar.appendChild(createIcon());
+
+    // Mobile : tap to select
+    const mobileIcon = createIcon();
+    mobileIcon.onclick = () => {
+        selectedIconKey = key;
+        closeMobileMenu();
+        showToast("📌 Icon selected");
+    };
+    mobileBar.appendChild(mobileIcon);
 }
+
 
 
 function importCustomIcon(input) {
@@ -4339,6 +4349,7 @@ function setupMapEvents() {
     const mapContainer = map.getContainer();
     mapContainer.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; });
     mapContainer.addEventListener('drop', e => { handleDrop(e); });
+
 }
 
 
@@ -4987,6 +4998,7 @@ function closeAd() {
 </div>
 </body>
 </html>
+
 
 
 
