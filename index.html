@@ -852,16 +852,15 @@ body {
 
 /* Panneau mobile (caché par défaut) */
 .mobile-menu-panel {
-    display: none;
+    display: block; /* On le laisse en block */
     position: fixed;
     top: 0;
-    right: -100%;
+    right: -100%; /* Mais on le cache à droite de l'écran */
     width: 280px;
     height: 100vh;
     background: white;
-    z-index: 10000; /* ← AU MÊME NIVEAU QUE LA PUB */
-    box-shadow: -4px 0 20px rgba(0,0,0,0.2);
-    transition: right 0.3s ease;
+    z-index: 10000;
+    transition: right 0.3s ease; /* L'animation se fera sur le 'right' */
     overflow-y: auto;
 }
 
@@ -4934,6 +4933,7 @@ function updateMainColor(color) {
 </div>
 </body>
 </html>
+
 
 
 
