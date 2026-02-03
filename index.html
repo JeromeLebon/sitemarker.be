@@ -889,114 +889,7 @@ body {
     height: 44px !important;
 }
 
-/* ====== MEDIA QUERY MOBILE ====== */
-@media (max-width: 768px) {
-    
-    /* Affiche le bouton hamburger */
-    .mobile-menu-btn {
-        display: flex !important;
-    }
-    
-    /* Affiche le panneau mobile */
-    .mobile-menu-panel {
-        display: block !important;
-    }
-    
-    /* Cache le topbar desktop SAUF le logo et la recherche */
-    #topbar {
-        min-height: 56px !important;
-        padding: 8px !important;
-        flex-wrap: nowrap !important;
-    }
-    
-    /* Cache tous les boutons SAUF recherche */
-    #topbar > button,
-    #topbar .toolbar-divider,
-    #topbar .gallery-container,
-    #topbar .setting-group,
-    #topbar .color-container {
-        display: none !important;
-    }
-    
-    /* Logo réduit */
-    .brand-container {
-        min-width: 100px !important;
-        height: 40px !important;
-    }
-    
-    .brand-logo {
-        height: 30px !important;
-    }
-    
-    .brand-subtitle {
-        font-size: 7px !important;
-    }
-    
-    /* Barre de recherche adaptée */
-    .search-group {
-        flex: 1 !important;
-        max-width: 200px !important;
-    }
-    
-    #address {
-        width: 100% !important;
-        font-size: 14px !important;
-        height: 40px !important;
-    }
-    
-    .btn-search {
-        min-width: 40px !important;
-        height: 40px !important;
-    }
-    
-    /* Carte ajustée */
-    #map {
-        height: calc(100vh - 56px - 60px) !important; /* topbar + pub */
-    }
-    
-    /* Historique pleine largeur sur mobile */
-    #historyPanel {
-        right: 10px !important;
-        left: 10px !important;
-        width: auto !important;
-        bottom: 80px !important;
-    }
-    
-    /* Toast au-dessus de la pub */
-    #modeIndicator {
-        top: auto !important;
-        bottom: 120px !important;
-    }
-    
-    /* Icônes galerie plus grandes dans le menu mobile */
-    .mobile-menu-panel .icon-item,
-    .mobile-menu-panel #iconToolbar img {
-        width: 48px !important;
-        height: 48px !important;
-        min-width: 48px !important;
-        min-height: 48px !important;
-    }
-    
-    /* Pub mobile adaptée */
-    #bottom-ad-bar {
-        height: 50px !important;
-    }
-    
-    #adsense-container {
-        height: 40px !important;
-    }
-}
 
-/* Très petits mobiles */
-@media (max-width: 480px) {
-    .brand-subtitle {
-        display: none !important; /* Cache le sous-titre */
-    }
-    
-    .brand-container {
-        min-width: 60px !important;
-    }
-}
 
 </style>
 
@@ -4902,6 +4795,116 @@ function updateMainColor(color) {
 }
 </script>
 
+<style>
+</* ====== MEDIA QUERY MOBILE ====== */
+@media (max-width: 768px) {
+    
+    /* Affiche le bouton hamburger */
+    .mobile-menu-btn {
+        display: flex !important;
+    }
+    
+    /* Affiche le panneau mobile */
+    .mobile-menu-panel {
+        display: block !important;
+    }
+    
+    /* Cache le topbar desktop SAUF le logo et la recherche */
+    #topbar {
+        min-height: 56px !important;
+        padding: 8px !important;
+        flex-wrap: nowrap !important;
+    }
+    
+    /* Cache tous les boutons SAUF recherche */
+    #topbar > button,
+    #topbar .toolbar-divider,
+    #topbar .gallery-container,
+    #topbar .setting-group,
+    #topbar .color-container {
+        display: none !important;
+    }
+    
+    /* Logo réduit */
+    .brand-container {
+        min-width: 100px !important;
+        height: 40px !important;
+    }
+    
+    .brand-logo {
+        height: 30px !important;
+    }
+    
+    .brand-subtitle {
+        font-size: 7px !important;
+    }
+    
+    /* Barre de recherche adaptée */
+    .search-group {
+        flex: 1 !important;
+        max-width: 200px !important;
+    }
+    
+    #address {
+        width: 100% !important;
+        font-size: 14px !important;
+        height: 40px !important;
+    }
+    
+    .btn-search {
+        min-width: 40px !important;
+        height: 40px !important;
+    }
+    
+    /* Carte ajustée */
+    #map {
+        height: calc(100vh - 56px - 60px) !important; /* topbar + pub */
+    }
+    
+    /* Historique pleine largeur sur mobile */
+    #historyPanel {
+        right: 10px !important;
+        left: 10px !important;
+        width: auto !important;
+        bottom: 80px !important;
+    }
+    
+    /* Toast au-dessus de la pub */
+    #modeIndicator {
+        top: auto !important;
+        bottom: 120px !important;
+    }
+    
+    /* Icônes galerie plus grandes dans le menu mobile */
+    .mobile-menu-panel .icon-item,
+    .mobile-menu-panel #iconToolbar img {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+    }
+    
+    /* Pub mobile adaptée */
+    #bottom-ad-bar {
+        height: 50px !important;
+    }
+    
+    #adsense-container {
+        height: 40px !important;
+    }
+}
+
+/* Très petits mobiles */
+@media (max-width: 480px) {
+    .brand-subtitle {
+        display: none !important; /* Cache le sous-titre */
+    }
+    
+    .brand-container {
+        min-width: 60px !important;
+    }
+} 
+</style>
 <div id="historyPanel" class="collapsed">
     <div id="historyHeader" onclick="toggleHistory()">
     <div class="header-left">
@@ -4934,6 +4937,7 @@ function updateMainColor(color) {
 </div>
 </body>
 </html>
+
 
 
 
