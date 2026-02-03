@@ -1075,6 +1075,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="preset" style="background: #000000;" onclick="updateMainColor('#000000')"></div>
     </div>
 </div>
+
+<div class="toolbar-divider"></div>
+
+    <button id="btnBrush" onclick="toggleBrush()" title="Freehand Drawing">
+        <i class="fa-solid fa-paintbrush"></i>
+        <span>Brush</span>
+    </button>
+    
+    <button onclick="addFluoMarker()" title="Add fluorescent point">
+        <i class="fa-solid fa-circle-dot"></i>
+        <span>Point</span>
+    </button>
+    
+    <button id="btnLine" onclick="toggleLineMode()" title="Draw a straight line">
+        <i class="fa-solid fa-pen-ruler"></i>
+        <span>Line</span>
+    </button>
+    
+    <button onclick="addTextMarker()" title="Add text">
+        <i class="fa-solid fa-font"></i>
+        <span>Text</span>
+    </button>
+    
+    <button id="btnErase" onclick="toggleEraseBrush()" title="Erase">
+        <i class="fa-solid fa-eraser"></i>
+        <span>Eraser</span>
+    </button>
+
+    <button id="btnMeasure" onclick="toggleMeasureMode()" title="Measure distance">
+    <i class="fa-solid fa-ruler"></i>
+        <span>Measure</span>
+    </button>
+    <div class="toolbar-divider"></div>
+
+     <button class="danger" onclick="clearAll()" title="Reset all annotations">
+        <i class="fa-solid fa-trash-can"></i>
+        <span>Reset</span>
+    </button>  
+
+    <button onclick="exportMap()" title="Export as PNG image" style="background: #9C27B0 !important; color: white !important;">
+        <i class="fa-solid fa-file-export"></i>
+        <span>Export PNG</span>
+    </button>
+</div>
 <!-- Menu hamburger mobile -->
 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
     <span></span>
@@ -1166,53 +1210,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
     </div>
 </div>
-<div class="toolbar-divider"></div>
-
-    <button id="btnBrush" onclick="toggleBrush()" title="Freehand Drawing">
-        <i class="fa-solid fa-paintbrush"></i>
-        <span>Brush</span>
-    </button>
-    
-    <button onclick="addFluoMarker()" title="Add fluorescent point">
-        <i class="fa-solid fa-circle-dot"></i>
-        <span>Point</span>
-    </button>
-    
-    <button id="btnLine" onclick="toggleLineMode()" title="Draw a straight line">
-        <i class="fa-solid fa-pen-ruler"></i>
-        <span>Line</span>
-    </button>
-    
-    <button onclick="addTextMarker()" title="Add text">
-        <i class="fa-solid fa-font"></i>
-        <span>Text</span>
-    </button>
-    
-    <button id="btnErase" onclick="toggleEraseBrush()" title="Erase">
-        <i class="fa-solid fa-eraser"></i>
-        <span>Eraser</span>
-    </button>
-
-    <button id="btnMeasure" onclick="toggleMeasureMode()" title="Measure distance">
-    <i class="fa-solid fa-ruler"></i>
-        <span>Measure</span>
-    </button>
-    <div class="toolbar-divider"></div>
-
-     <button class="danger" onclick="clearAll()" title="Reset all annotations">
-        <i class="fa-solid fa-trash-can"></i>
-        <span>Reset</span>
-    </button>  
-
-    <button onclick="exportMap()" title="Export as PNG image" style="background: #9C27B0 !important; color: white !important;">
-        <i class="fa-solid fa-file-export"></i>
-        <span>Export PNG</span>
-    </button>
-    
-
-    
-</div>
-
 <div id="modeIndicator"></div>
 <div id="map"></div>
 
@@ -4919,6 +4916,7 @@ function closeAd() {
 </div>
 </body>
 </html>
+
 
 
 
