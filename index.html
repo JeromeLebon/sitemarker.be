@@ -3913,34 +3913,50 @@ function setupRotationEvents(m) {
 
 // --- GESTION DES ICONES ---
 function renderToolbar() {
-    const bar = document.getElementById('iconToolbar');
-    bar.innerHTML = '';
-    
+    const desktopBar = document.getElementById('iconToolbar');
+    const mobileBar = document.getElementById('iconToolbarMobile');
+
+    // On vide les deux barres
+    desktopBar.innerHTML = '';
+    mobileBar.innerHTML = '';
+
     // Icônes de base
-    Object.keys(SVG_LIBRARY).forEach(key => addIconToBar(key, SVG_LIBRARY[key], false));
+    Object.keys(SVG_LIBRARY).forEach(key => addIconToBars(key, SVG_LIBRARY[key], false));
+
     // Icônes personnalisées
-    Object.keys(CUSTOM_ICONS).forEach(key => addIconToBar(key, CUSTOM_ICONS[key], true));
+    Object.keys(CUSTOM_ICONS).forEach(key => addIconToBars(key, CUSTOM_ICONS[key], true));
 }
-function addIconToBar(key, svg, isDeletable) {
-    const bar = document.getElementById('iconToolbar');
-    const div = document.createElement('div');
-    div.className = 'icon-item';
-    div.innerHTML = svg;
-    div.draggable = true;
-    div.title = isDeletable ? "Right-click to delete" : "";
-    div.ondragstart = e => e.dataTransfer.setData('iconKey', key);
-    
-    if(isDeletable) {
-        div.oncontextmenu = (e) => {
-            e.preventDefault();
-            delete CUSTOM_ICONS[key];
-            localStorage.setItem('my_custom_icons', JSON.stringify(CUSTOM_ICONS));
-            renderToolbar();
-            showToast("🗑️ Icon deleted");
-        };
-    }
-    bar.appendChild(div);
+
+function addIconToBars(key, svg, isDeletable) {
+    const desktopBar = document.getElementById('iconToolbar');
+    const mobileBar = document.getElementById('iconToolbarMobile');
+
+    // Création de l'icône
+    const createIcon = () => {
+        const div = document.createElement('div');
+        div.className = 'icon-item';
+        div.innerHTML = svg;
+        div.draggable = true;
+        div.title = isDeletable ? "Right-click to delete" : "";
+        div.ondragstart = e => e.dataTransfer.setData('iconKey', key);
+
+        if (isDeletable) {
+            div.oncontextmenu = (e) => {
+                e.preventDefault();
+                delete CUSTOM_ICONS[key];
+                localStorage.setItem('my_custom_icons', JSON.stringify(CUSTOM_ICONS));
+                renderToolbar();
+                showToast("🗑️ Icon deleted");
+            };
+        }
+        return div;
+    };
+
+    // On ajoute une copie dans chaque barre
+    desktopBar.appendChild(createIcon());
+    mobileBar.appendChild(createIcon());
 }
+
 
 function importCustomIcon(input) {
     const file = input.files[0];
@@ -4636,6 +4652,7 @@ function scrollGallery(distance) {
     toolbar.scrollBy({ left: distance, behavior: 'smooth' });
 }
 
+	
 // Réparation de la touche Entrée
 document.getElementById('address').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
@@ -4959,6 +4976,7 @@ function closeAd() {
 </div>
 </body>
 </html>
+
 
 
 
