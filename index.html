@@ -1177,6 +1177,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fa-solid fa-file-export"></i>
         <span>Export PNG</span>
     </button>
+
+ <button onclick="toggleAbout(event)" title="About & Privacy" style="
+    background: rgba(255, 255, 255, 0.15); 
+    color: #fff; 
+    border: none; 
+    border-radius: 50%; 
+    width: 24px; 
+    height: 24px; 
+    min-width: 24px;
+    margin-left: 12px;
+    align-self: center;
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    outline: none; 
+    padding: 0;
+    flex-shrink: 0;
+    transition: background 0.2s;
+">
+    <span style="font-family: serif; font-style: italic; font-weight: bold; font-size: 14px; pointer-events: none; line-height: 1;">i</span>
+</button>
+
 </div>
 <!-- Menu hamburger mobile -->
 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -5034,13 +5057,9 @@ function closeAd() {
         <button onclick="closeAd()" class="close-ad">×</button>
     </div>
 </div>
-<footer style="position: fixed; bottom: 80px; right: 20px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; font-size: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-family: sans-serif;">
-    <a href="#" onclick="toggleAbout(event)" style="color: #333; text-decoration: none;">About & Privacy</a>
-</footer>
-
 <div id="about-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; overflow-y: auto; padding: 20px; font-family: sans-serif;">
     <div style="background: white; max-width: 800px; margin: 40px auto; padding: 30px; border-radius: 8px; position: relative; line-height: 1.6; color: #333;">
-        <button onclick="toggleAbout(event)" style="position: absolute; top: 10px; right: 10px; cursor: pointer; border: none; background: none; font-size: 20px;">×</button>
+        <button onclick="toggleAbout(event)" style="position: absolute; top: 10px; right: 10px; cursor: pointer; border: 2px solid #333; background: white; border-radius: 50%; width: 30px; height: 30px; font-size: 20px; font-weight: bold; color: #000; display: flex; align-items: center; justify-content: center; z-index: 100001;">×</button>
         
         <div id="content-seo">
             <h1 style="margin-top: 0;">SiteMarker: Professional Map Marking & Site Planning Tool</h1>
@@ -5078,27 +5097,15 @@ function closeAd() {
 </div>
 
 <script>
-function toggleAbout(e) {
-    e.preventDefault();
+function toggleAbout(event) {
+    if (event) event.preventDefault();
     const overlay = document.getElementById('about-overlay');
-    overlay.style.display = (overlay.style.display === 'none') ? 'block' : 'none';
+    if (overlay) {
+        overlay.style.display = (overlay.style.display === 'none' || overlay.style.display === '') ? 'block' : 'none';
+    } else {
+        alert("Erreur : l'overlay est introuvable dans le code !");
+    }
 }
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
