@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiteMarker – Professional Map Annotation & Site Planning Tool</title>
+<meta name="description" content="SiteMarker is a free online map annotation tool for construction professionals, logistics managers and urban planners. Create site plans, mark roadworks, export PNG maps.">
+
+<!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J77FD9B3T6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-J77FD9B3T6');
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1023162974911190" crossorigin="anonymous"></script>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #2C3E50;
+    background: #f8f9fa;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+    border-bottom: 3px solid #FFC107;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+header .logo span {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+}
+
+nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover { color: #FFC107; }
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #2C3E50 0%, #34495E 60%, #2C3E50 100%);
+    padding: 80px 32px;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero h1 span { color: #FFC107; }
+
+.hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    max-width: 600px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: #FFC107;
+    color: #2C3E50;
+    padding: 16px 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(255,193,7,0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,193,7,0.5);
+}
+
+.btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.4);
+    margin-left: 16px;
+    transition: border-color 0.2s;
+}
+
+.btn-secondary:hover { border-color: white; }
+
+/* BADGES */
+.hero-badges {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* AD ZONE */
+.ad-zone {
+    background: white;
+    padding: 20px 32px;
+    text-align: center;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.ad-label {
+    font-size: 10px;
+    color: #aaa;
+    display: block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* FEATURES */
+.features {
+    padding: 80px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.features h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.features .subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 16px;
+    margin-bottom: 56px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e1e8ed;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    font-size: 14px;
+    color: #7f8c8d;
+    line-height: 1.6;
+}
+
+/* HOW IT WORKS */
+.how-it-works {
+    background: white;
+    padding: 80px 32px;
+}
+
+.how-it-works h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.how-it-works .subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 16px;
+    margin-bottom: 56px;
+}
+
+.steps {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    text-align: center;
+}
+
+.step-number {
+    width: 48px;
+    height: 48px;
+    background: #FFC107;
+    color: #2C3E50;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.step h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.step p { font-size: 14px; color: #7f8c8d; line-height: 1.5; }
+
+/* USE CASES */
+.use-cases {
+    padding: 80px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.use-cases h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 48px;
+}
+
+.use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.use-case {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    border-left: 4px solid #FFC107;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.use-case h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.use-case p { font-size: 14px; color: #7f8c8d; line-height: 1.6; }
+
+/* FAQ */
+.faq {
+    background: white;
+    padding: 80px 32px;
+}
+
+.faq h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 48px;
+}
+
+.faq-list {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #e1e8ed;
+    padding: 20px 0;
+}
+
+.faq-item h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #2C3E50;
+}
+
+.faq-item p {
+    font-size: 14px;
+    color: #7f8c8d;
+    line-height: 1.7;
+}
+
+/* CTA BOTTOM */
+.cta-bottom {
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    padding: 80px 32px;
+    text-align: center;
+    color: white;
+}
+
+.cta-bottom h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.cta-bottom p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 32px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* FOOTER */
+footer {
+    background: #1a252f;
+    color: rgba(255,255,255,0.6);
+    padding: 32px;
+    text-align: center;
+    font-size: 13px;
+}
+
+footer a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+footer a:hover { color: #FFC107; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 15px; }
+    .btn-secondary { display: block; margin: 12px auto 0; width: fit-content; }
+    header { flex-direction: column; gap: 16px; }
+    nav a { margin: 0 8px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">
+        <span>🏗️ SiteMarker</span>
+    </div>
+    <nav>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#faq">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="app.html" style="background:#FFC107; color:#2C3E50; padding:8px 20px; border-radius:6px; font-weight:700; margin-left:16px;">Open App →</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Professional <span>Map Annotation</span><br>for Construction & Logistics</h1>
+    <p>Create detailed site plans, mark roadwork zones, place signage icons, and export high-quality maps — all directly in your browser. No installation required.</p>
+    <a href="app.html" class="btn-primary">🗺️ Launch SiteMarker Free</a>
+    <a href="#how-it-works" class="btn-secondary">See how it works</a>
+    
+    <div class="hero-badges">
+        <span class="badge">✅ 100% Free</span>
+        <span class="badge">🔒 No account required</span>
+        <span class="badge">📤 Export PNG & JSON</span>
+        <span class="badge">🌍 OpenStreetMap powered</span>
+        <span class="badge">📱 Mobile friendly</span>
+    </div>
+</section>
+
+<!-- AD ZONE 1 -->
+<div class="ad-zone">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1023162974911190"
+         data-ad-slot="9233304444"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+    <h2>Everything You Need for Site Planning</h2>
+    <p class="subtitle">SiteMarker combines professional mapping tools with an intuitive interface designed for field workers and project managers.</p>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">📍</div>
+            <h3>Road Sign Library</h3>
+            <p>Access a comprehensive library of standardized road signs and construction markers. Drag and drop icons directly onto the map to create accurate signaling plans compliant with Belgian and European standards.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">✏️</div>
+            <h3>Freehand Drawing Tools</h3>
+            <p>Draw custom zones, access routes, and exclusion areas with our brush tool. Adjust line thickness and color to differentiate between pedestrian zones, vehicle corridors, and restricted areas.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📏</div>
+            <h3>Distance Measurement</h3>
+            <p>Instantly measure distances between any two points on the map. Essential for calculating safety perimeters, estimating material quantities, or verifying compliance with regulatory setback requirements.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📤</div>
+            <h3>PNG & Project Export</h3>
+            <p>Export your annotated map as a high-resolution PNG image ready for permits, client presentations, or safety briefings. Save your work as a JSON project file to continue editing later.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🔤</div>
+            <h3>Text Annotations</h3>
+            <p>Add clear text labels to identify streets, zones, equipment positions, or safety instructions. Labels are fully editable and can be repositioned at any time.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🖼️</div>
+            <h3>Custom Icons</h3>
+            <p>Upload your own SVG icons to extend the library with company-specific markers, custom signage, or specialized equipment symbols relevant to your industry or region.</p>
+        </div>
+    </div>
+</section>
+
+<!-- AD ZONE 2 -->
+<div class="ad-zone">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1023162974911190"
+         data-ad-slot="1149662228"
+         data-ad-format="rectangle"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how-it-works">
+    <h2>How to Create Your Site Plan in Minutes</h2>
+    <p class="subtitle">SiteMarker is designed to be used immediately, without any training or software installation.</p>
+    
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>Search your location</h3>
+            <p>Type your worksite address in the search bar. SiteMarker will navigate to the exact location on OpenStreetMap.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>Add your markers</h3>
+            <p>Drag road signs, safety cones, and equipment icons from the toolbar directly onto the map at the correct positions.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>Draw zones & routes</h3>
+            <p>Use the brush tool to define work areas, detour routes, or pedestrian zones. Adjust colors to distinguish different areas.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <h3>Export your plan</h3>
+            <p>Download the map as a PNG for immediate use in documents, emails, or permit applications. Save as JSON to edit later.</p>
+        </div>
+    </div>
+</section>
+
+<!-- USE CASES -->
+<section class="use-cases" id="use-cases">
+    <h2>Who Uses SiteMarker?</h2>
+    
+    <div class="use-cases-grid">
+        <div class="use-case">
+            <h3>🚧 Road Construction Companies</h3>
+            <p>Create detailed traffic management plans for road maintenance and construction projects. Mark temporary traffic lights, lane diversions, speed restrictions, and worker safety zones to meet regulatory requirements.</p>
+        </div>
+        <div class="use-case">
+            <h3>🏗️ General Contractors</h3>
+            <p>Communicate site access plans to subcontractors and delivery drivers. Mark crane swing zones, material storage areas, and site entrances to improve coordination and reduce accidents on complex construction sites.</p>
+        </div>
+        <div class="use-case">
+            <h3>🎪 Event Organizers</h3>
+            <p>Plan temporary road closures, parking areas, and pedestrian flows for public events, festivals, and sporting competitions. Share clear visual plans with local authorities and security teams.</p>
+        </div>
+        <div class="use-case">
+            <h3>🏛️ Municipal Authorities</h3>
+            <p>Document public works schedules, plan maintenance interventions, and communicate roadwork impacts to residents. Create clear visual records of infrastructure changes for administrative archives.</p>
+        </div>
+        <div class="use-case">
+            <h3>🚒 Emergency Services</h3>
+            <p>Map incident perimeters, access routes for emergency vehicles, and evacuation zones. Create rapid situational plans during incidents to coordinate response teams efficiently.</p>
+        </div>
+        <div class="use-case">
+            <h3>📦 Logistics Managers</h3>
+            <p>Plan last-mile delivery routes, mark loading zones, and identify access restrictions in urban areas. Optimize vehicle movements within industrial sites and distribution centers.</p>
+        </div>
+    </div>
+</section>
+
+<!-- AD ZONE 3 -->
+<div class="ad-zone">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1023162974911190"
+         data-ad-slot="4228389772"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-list">
+        <div class="faq-item">
+            <h3>Is SiteMarker completely free to use?</h3>
+            <p>Yes, SiteMarker is entirely free. There are no subscription fees, no account registration, and no limitations on how many plans you can create or export. The tool is funded by non-intrusive advertisements.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Do I need to create an account to save my work?</h3>
+            <p>No account is required. Your work is saved locally as a JSON project file that you download to your computer. You can reopen this file at any time to continue editing your site plan.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I use SiteMarker on a mobile phone or tablet?</h3>
+            <p>Yes, SiteMarker is fully responsive and works on smartphones and tablets. The mobile interface includes a sidebar menu for accessing all tools. For complex plans with many markers, a desktop or laptop is recommended for the best experience.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What map data does SiteMarker use?</h3>
+            <p>SiteMarker uses OpenStreetMap (OSM), a free and open global map maintained by a community of volunteers. The map data is highly accurate for most areas and is updated continuously. Satellite imagery is not currently included.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I add my own custom icons or company logos?</h3>
+            <p>Yes. SiteMarker supports custom SVG file uploads. You can add your own signage icons, company logos, or industry-specific markers to the toolbar, where they will persist between sessions using your browser's local storage.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Is the exported PNG suitable for official permit applications?</h3>
+            <p>SiteMarker exports high-resolution PNG images that are suitable for inclusion in documents, PDFs, and formal applications. However, compliance with local authority requirements varies by region — always verify the specific format requirements with the relevant authority before submission.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What browsers are supported?</h3>
+            <p>SiteMarker works on all modern browsers including Google Chrome, Mozilla Firefox, Microsoft Edge, and Safari. For the best performance, we recommend using an up-to-date version of Chrome or Firefox.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section class="cta-bottom">
+    <h2>Ready to Create Your Site Plan?</h2>
+    <p>Join thousands of construction professionals who use SiteMarker to plan and communicate their worksites clearly and efficiently.</p>
+    <a href="app.html" class="btn-primary">🗺️ Open SiteMarker Now — It's Free</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2025 SiteMarker.be — Professional Map Annotation Tool</p>
+    <div style="margin-top: 12px;">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="app.html">Launch App</a>
+        <a href="sitemap.xml">Sitemap</a>
+    </div>
+    <p style="margin-top: 12px; font-size: 11px;">Powered by OpenStreetMap contributors. Map data © OpenStreetMap contributors, ODbL license.</p>
+</footer>
+
+</body>
+</html>
